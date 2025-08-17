@@ -2,9 +2,9 @@ name: API Tests
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, cinema ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, master, cinema ]
   workflow_dispatch:
     inputs:
       environment:
@@ -24,48 +24,61 @@ jobs:
   api-tests:
     name: Run API Tests
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Docker Compose
-        run: |
-          docker compose --version
-      
+        run: docker compose --version
+
       - name: Start services with Docker Compose
+        run: docker compose up -d
+
+      - name: Wait for services to be ready
         run: |
-          docker compose up -d
-          # Wait for services to be ready
-          echo "Waiting for services to be ready..."
-          sleep 120
-      
+          for url in \
+            "http://localhost:8000/health" \
+            "http://localhost:8080/health" \
+            "http://localhost:8081/api/movies/health" \
+            "http://localhost:8082/api/events/health"
+          do
+            echo "Waiting for $url ..."
+            for i in {1..30}; do
+              if curl -fsS $url > /dev/null; then
+                echo "$url is healthy"
+                break
+              fi
+              sleep 4
+            done
+          done
+
       - name: Set up Node.js
+        if: ${{ github.event.inputs.environment == 'local' }}
         uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'npm'
           cache-dependency-path: tests/postman/package-lock.json
-      
+
       - name: Install Newman and dependencies
+        if: ${{ github.event.inputs.environment == 'local' }}
         working-directory: tests/postman
         run: npm install
-      
-      - name: Run API tests
+
+      - name: Run API tests (local)
+        if: ${{ github.event.inputs.environment == 'local' }}
+        working-directory: tests/postman
+        run: npm run test:local
+
+      - name: Run API tests (Docker)
+        if: ${{ github.event.inputs.environment == 'docker' || github.event.inputs.environment == '' }}
         working-directory: tests/postman
         run: |
-
-          docker compose up -d
-          # Wait for services to be ready
-          echo "Waiting for services to be ready..."
-          sleep 15
-          # Build the Docker image
           docker build -t cinemaabyss-api-tests .
-          
-          # Run the tests in Docker
           docker run --network=cinemaabyss-network -v "$(pwd)/reports:/app/reports" cinemaabyss-api-tests
-        
-      
+
+
       - name: Stop services
         if: always()
         run: docker compose down

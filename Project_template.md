@@ -67,7 +67,7 @@
 - [tests/postman/reports/report-local-2025-08-17T17-26-35.990Z.html](tests/postman/reports/report-local-2025-08-17T17-26-35.990Z.html)
 - [tests/postman/reports/cinemaabyss-events-service.log](tests/postman/reports/cinemaabyss-events-service.log)
 
-** Newman (console)**
+**Newman (console)**
 - <img src="tests/postman/reports/report-local-2025-08-17T17-26-35.990Z.png" height="250px" />
 
 **Postman**
@@ -134,6 +134,9 @@ jobs:
 ```
 Как только сборка отработает и в github registry появятся ваши образы, можно переходить к блоку настройки Kubernetes
 Успешным результатом данного шага является "зеленая" сборка и "зеленые" тесты
+
+- **GitHub Actions**  
+<img src="tests/postman/reports/GitHub Actions_All workflows.png" height="250px" />
 
 
 ### Proxy в Kubernetes
