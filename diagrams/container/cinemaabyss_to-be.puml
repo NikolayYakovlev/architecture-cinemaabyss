@@ -1,0 +1,65 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+' skinparam linetype ortho
+' skinparam linetype polyline
+
+' Контейнеры
+Person(user, "Пользователь", "Внешний пользователь системы")
+
+System_Boundary(ca, "CinemaAbyss") {
+    Container(proxy, "Proxy Service (API Gateway)", "Go", "Единая точка входа, маршрутизация запросов, интеграция микросервисов")
+    Container(movies, "Movies Service", "Go", "Микросервис фильмов: метаданные, жанры, рейтинги")
+    Container(users, "Users Service", "Go", "Микросервис пользователей: управление пользователями")
+    Container(payments, "Payments Service", "Go", "Микросервис платежей: обработка платежей")
+    Container(subscriptions, "Subscriptions Service", "Go", "Микросервис подписок: управление подписками")
+    Container(events, "Events Service", "Go", "Обработка событий (фильмы, пользователи, платежи), интеграция с Kafka")
+    ContainerDb(db, "PostgreSQL", "Database", "Общая база данных для всех сервисов")
+    Container(health, "Monitoring/Health Service", "Go", "Мониторинг состояния, health-check, метрики")
+}
+
+' Kafka вне границ системы
+Container_Ext(kafka, "Kafka", "Message Broker", "Событийная интеграция между сервисами")
+
+' Взаимодействия пользователя
+Rel(user, proxy, "Использует", "HTTP/REST")
+
+' Взаимодействия между сервисами через API Gateway
+Rel(proxy, movies, "Запросы к фильмам", "HTTP/REST")
+Rel(proxy, users, "Запросы к пользователям", "HTTP/REST")
+Rel(proxy, payments, "Запросы к платежам", "HTTP/REST")
+Rel(proxy, subscriptions, "Запросы к подпискам", "HTTP/REST")
+Rel(proxy, events, "Запросы к событиям", "HTTP/REST")
+Rel(proxy, health, "Health-check", "HTTP/REST")
+
+' Доступ сервисов к БД
+Rel(movies, db, "Чтение/запись", "SQL")
+Rel(users, db, "Чтение/запись", "SQL")
+Rel(payments, db, "Чтение/запись", "SQL")
+Rel(subscriptions, db, "Чтение/запись", "SQL")
+
+' Интеграция через Kafka (общается с ним только Event Service)
+Rel(events, kafka, "Пишет/читает события", "Kafka")
+
+' > #### Events Service
+' > Обрабатывает коммуникацию между сервисами на основе событий с использованием Kafka:
+' > - События фильмов (просмотр, оценка, добавление);
+Rel(movies, events, "Пишет/читает события", "Kafka (event-driven HTTP/REST или gRPC)")
+' > - События пользователей (регистрация, вход);
+Rel(users, events, "Пишет/читает события", "Kafka (event-driven HTTP/REST или gRPC)")
+' > - События платежей (успешные, неудачные).
+Rel(payments, events, "Пишет/читает события", "Kafka (event-driven HTTP/REST или gRPC)")
+' Rel(subscriptions, events, "Пишет/читает события", "Kafka (event-driven HTTP/REST или gRPC)")
+
+' Мониторинг
+' > `/api/movies/health`
+Rel(health, movies, "Собирает метрики/health", "HTTP/REST")
+' Rel(health, users, "Собирает метрики/health", "HTTP/REST")
+' Rel(health, payments, "Собирает метрики/health", "HTTP/REST")
+' Rel(health, subscriptions, "Собирает метрики/health", "HTTP/REST")
+' > `/api/events/health`
+Rel(health, events, "Собирает метрики/health", "HTTP/REST")
+' Rel(health, proxy, "Собирает метрики/health", "HTTP/REST")
+' Rel(health, db, "Собирает метрики/health", "SQL")
+
+@enduml
