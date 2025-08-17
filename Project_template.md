@@ -62,6 +62,29 @@
 Необходимые тесты для проверки этого API вызываются при запуске npm run test:local из папки tests/postman 
 Приложите скриншот тестов и скриншот состояния топиков Kafka из UI http://localhost:8090 
 
+**Результаты тестов**
+- [tests/postman/reports/junit-report-local-2025-08-17T17-26-35.990Z.xml](tests/postman/reports/junit-report-local-2025-08-17T17-26-35.990Z.xml)
+- [tests/postman/reports/report-local-2025-08-17T17-26-35.990Z.html](tests/postman/reports/report-local-2025-08-17T17-26-35.990Z.html)
+- [tests/postman/reports/cinemaabyss-events-service.log](tests/postman/reports/cinemaabyss-events-service.log)
+
+** Newman (console)**
+- <img src="tests/postman/reports/report-local-2025-08-17T17-26-35.990Z.png" height="250px" />
+
+**Postman**
+- <img src="tests/postman/reports/report-local-2025-08-17T17-26-35.990Z (Postman).png" height="250px" />
+
+**Kafka UI**
+- _Brokers_  
+<img src="tests/postman/reports/kafka-ui_Brokers.png" height="250px" />
+- _Topics_  
+<img src="tests/postman/reports/kafka-ui_Topics.png" height="250px" />
+<img src="tests/postman/reports/kafka-ui_Topics, __consumer_offsets.png" height="250px" />
+<img src="tests/postman/reports/kafka-ui_Topics, movie-events.png" height="250px" />
+<img src="tests/postman/reports/kafka-ui_Topics, payment-events.png" height="250px" />
+<img src="tests/postman/reports/kafka-ui_Topics, user-events.png" height="250px" />
+- _Consumers_  
+<img src="tests/postman/reports/kafka-ui_Consumers.png" height="250px" />
+
 # Задание 3
 
 Команда начала переезд в Kubernetes для лучшего масштабирования и повышения надежности. 
