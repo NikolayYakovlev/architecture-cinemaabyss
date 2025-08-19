@@ -144,6 +144,12 @@ jobs:
 #### Шаг 1
 Для деплоя в kubernetes необходимо залогиниться в docker registry Github'а.
 1. Создайте Personal Access Token (PAT) https://github.com/settings/tokens . Создавайте class с правом read:packages
+
+> **Комментарий**
+> 
+> Сейчас это назвается персональный токен (классический) (_New personal access token (classic)_)  
+> И выбрать нужно scope (_Select scopes: read:packages_)  
+
 2. В src/kubernetes/*.yaml (event-service, monolith, movies-service и proxy-service)  отредактируйте путь до ваших образов 
 ```bash
  spec:
@@ -151,6 +157,11 @@ jobs:
       - name: events-service
         image: ghcr.io/ваш логин/имя репозитория/events-service:latest
 ```
+
+> **Комментарий**
+> 
+> В пути к образам `image` весь URL должен быть lower case, иначе Kubernetes не сможет его найти и загрузить
+
 3. Добавьте в секрет src/kubernetes/dockerconfigsecret.yaml в поле
 ```bash
  .dockerconfigjson: значение в base64 файла ~/.docker/config.json
@@ -179,11 +190,21 @@ jobs:
  echo -n ваш_логин:ваш_токен | base64
 ```
 
+> **Комментарий**
+> 
+> В Windows PowerShell нет встроенной команды base64, как в Linux/macOS.  
+> Вместо этого нужно использовать PowerShell-команду для кодирования в base64:  
+> `[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes("логин:токен"))`
+
 После заполнения config.json, также прогоните содержимое через base64
 
 ```bash
 cat .docker/config.json | base64
 ```
+
+> **Комментарий**
+> 
+> [Convert]::ToBase64String([IO.File]::ReadAllBytes("$env:USERPROFILE\.docker\config.json"))
 
 и полученное значение добавляем в
 
@@ -292,7 +313,34 @@ cat .docker/config.json | base64
   ```
   11. Вызовите https://cinemaabyss.example.com/api/movies
   Вы должны увидеть вывод списка фильмов
+
+> <img src="tests/postman/reports/report-local-2025-08-21T21-56-56.964Z (Ingress).png" height="250px" />
+
   Можно поэкспериментировать со значением   MOVIES_MIGRATION_PERCENT в src/kubernetes/configmap.yaml и убедится, что вызовы movies уходят полностью в новый сервис
+
+> **Комментарий**
+> 
+> Значения в `src/kubernetes/configmap.yaml` не применяются, т.к. переменная с таким же именем указана в src/kubernetes/proxy-service.yaml:
+> ```yaml
+>         env:
+>         # ...
+>         - name: MOVIES_MIGRATION_PERCENT
+>          value: "50"
+>         envFrom:
+>         - configMapRef:
+>             name: cinemaabyss-config
+> ```
+> Приоритет `env` выше, чем у секции `envFrom`, в которой подключаются переменные `configmap.yaml`, поэтому события в логи сервисов `deployment/monolith` и `deployment/movies-service` пишут примерно с одинаковой частотой, игнорируя значение в `src/kubernetes/configmap.yaml`. Для того, чтобы переменная вступила в силу, нужно удалить/закомментировать значение `MOVIES_MIGRATION_PERCENT` в секции `env`.
+> - configmap.yaml: `MOVIES_MIGRATION_PERCENT: "100"`
+> <img src="tests/postman/reports/report-local-2025-08-21T23-11-33.964Z (Ingress, 3).png" height="150px" />
+> - configmap.yaml: `MOVIES_MIGRATION_PERCENT: "0"`  
+>   ```bash
+>   kubectl apply -f .\src\kubernetes\configmap.yaml
+>   kubectl -n cinemaabyss rollout restart deployment/monolith
+>   kubectl rollout restart deployment/proxy-service -n cinemaabyss
+>   kubectl rollout restart deployment/movies-service -n cinemaabyss
+>   ```
+>   <img src="tests/postman/reports/report-local-2025-08-21T23-16-41.964Z (Ingress, 4).png" height="150px" />
 
   12. Запустите тесты из папки tests/postman
   ```bash
@@ -301,9 +349,25 @@ cat .docker/config.json | base64
   Часть тестов с health-чек упадет, но создание событий отработает.
   Откройте логи event-service и сделайте скриншот обработки событий
 
-#### Шаг 3
-Добавьте сюда скриншота вывода при вызове https://cinemaabyss.example.com/api/movies и  скриншот вывода event-service после вызова тестов.
+**Результаты тестов**
 
++ [report-local-2025-08-21T23-27-49.964Z (Ingress, 5).log](<tests/postman/reports/report-local-2025-08-21T23-27-49.964Z (Ingress, 5).log>)
++ <img src="tests/postman/reports/report-local-2025-08-21T23-29-36.964Z (Ingress, 6).png" height="250px" />
+
+> **Комментарий**
+> 
+> Основной сложностью было решение проблемы с прогоном тестов – падали все ассерты.
+> 
+> После разбирательств оказалось, что `minikube` не смог занять 80-й порт (работал только HTTPS/443), поэтому все ассерты в тестах падали. После нахождения первопричины, остановки локального IIS проблемой стало перестроение сервисов _Kafka_ и _Zookeeper_ - после перезапуска `minikube` (`minikube stop`/`minikube start` для захвата Ingress'ом 80-го порта) оба сервиса свалились в `CrashLoopBackOff` и ничего не помогало. Удаление PVC/PV падало с таймаутом контекста операции (возможно наложение проблемы с подвисшим терминалом `minikube ssh`), удаление метаданных через `minikube ssh` тоже не спасало - все операции удаления оканчивались без результата.
+> 
+> Проблему “получилось решить” только полной очисткой кластера через `minikube delete`. Но т.к. манифесты были уже настроены, новый кластер поднялся уже очень быстро.
+
+#### Шаг 3
+Добавьте сюда скриншоты вывода при вызове https://cinemaabyss.example.com/api/movies и  скриншот вывода event-service после вызова тестов.
+
+> + <img src="tests/postman/reports/report-local-2025-08-21T21-56-56.964Z (Ingress).png" height="250px" />
+> + [events-service.log](<tests/postman/reports/report-local-2025-08-21T23-41-27.964Z (Ingress, 7).log>)
+> + <img src="tests/postman/reports/report-local-2025-08-22T02-57-45.964Z (Ingress, 8).png" height="250px" />
 
 # Задание 4
 Для простоты дальнейшего обновления и развертывания вам как архитектуру необходимо так же реализовать helm-чарты для прокси-сервиса и проверить работу 
