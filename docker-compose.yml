@@ -49,6 +49,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - cinemaabyss-network
+    healthcheck:
+      test: ["CMD", "kafka-topics.sh", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   # Monolith Service
   monolith:
@@ -57,7 +62,8 @@ services:
       dockerfile: Dockerfile
     container_name: cinemaabyss-monolith
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
@@ -65,6 +71,12 @@ services:
       DB_CONNECTION_STRING: postgres://postgres:postgres_password@postgres:5432/cinemaabyss?sslmode=disable
     networks:
       - cinemaabyss-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # Movies Microservice
   movies-service:
@@ -73,7 +85,8 @@ services:
       dockerfile: Dockerfile
     container_name: cinemaabyss-movies-service
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     ports:
       - "8081:8081"
     environment:
@@ -81,6 +94,12 @@ services:
       DB_CONNECTION_STRING: postgres://postgres:postgres_password@postgres:5432/cinemaabyss?sslmode=disable
     networks:
       - cinemaabyss-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/api/movies/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # Events Microservice
   events-service:
@@ -89,8 +108,10 @@ services:
       dockerfile: Dockerfile
     container_name: cinemaabyss-events-service
     depends_on:
-      - postgres
-      - kafka
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
     ports:
       - "8082:8082"
     environment:
@@ -98,6 +119,12 @@ services:
       KAFKA_BROKERS: kafka:9092
     networks:
       - cinemaabyss-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/api/events/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # Proxy Service (API Gateway)
   proxy-service:
@@ -120,6 +147,12 @@ services:
       MOVIES_MIGRATION_PERCENT: "50"
     networks:
       - cinemaabyss-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # Kafka UI for monitoring Kafka
   kafka-ui:

@@ -1,0 +1,102 @@
+2025-08-17 22:12:55.565 | INFO:     Started server process [1]
+2025-08-17 22:12:55.565 | INFO:     Waiting for application startup.
+2025-08-17 22:12:55.575 | INFO:aiokafka.consumer.subscription_state:Updating subscribed topics to: frozenset({'movie-events', 'user-events', 'payment-events'})
+2025-08-17 22:12:55.575 | INFO:     Application startup complete.
+2025-08-17 22:12:55.576 | INFO:     Uvicorn running on http://0.0.0.0:8082 (Press CTRL+C to quit)
+2025-08-17 22:12:55.588 | INFO:aiokafka.consumer.group_coordinator:Discovered coordinator 1001 for group events-service-group
+2025-08-17 22:12:55.588 | INFO:aiokafka.consumer.group_coordinator:Revoking previously assigned partitions set() for group events-service-group
+2025-08-17 22:12:55.588 | INFO:aiokafka.consumer.group_coordinator:(Re-)joining group events-service-group
+2025-08-17 22:12:55.590 | INFO:aiokafka.consumer.group_coordinator:Joined group 'events-service-group' (generation 3) with member_id aiokafka-0.11.0-8b75aced-2863-4cf5-892b-d66d1a5b1efb
+2025-08-17 22:12:55.590 | INFO:aiokafka.consumer.group_coordinator:Elected group leader -- performing partition assignments using roundrobin
+2025-08-17 22:12:55.591 | INFO:aiokafka.consumer.group_coordinator:Successfully synced group events-service-group with generation 3
+2025-08-17 22:12:55.591 | INFO:aiokafka.consumer.group_coordinator:Setting newly assigned partitions {TopicPartition(topic='payment-events', partition=0), TopicPartition(topic='movie-events', partition=0), TopicPartition(topic='user-events', partition=0)} for group events-service-group
+2025-08-17 22:13:08.608 | INFO:     172.21.0.1:57628 - "GET /api/events/health HTTP/1.1" 200 OK
+2025-08-17 22:13:08.702 | INFO:root:Produced event to movie-events: {'movie_id': 38, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 20, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:13:08.702 | INFO:     172.21.0.1:57628 - "POST /api/events/movie HTTP/1.1" 201 Created
+2025-08-17 22:13:08.703 | INFO:root:Consumed from movie-events: {'movie_id': 38, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 20, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:13:08.790 | INFO:root:Produced event to user-events: {'user_id': 20, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:13:08.771Z'}
+2025-08-17 22:13:08.791 | INFO:root:Consumed from user-events: {'user_id': 20, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:13:08.771Z'}
+2025-08-17 22:13:08.791 | INFO:     172.21.0.1:57628 - "POST /api/events/user HTTP/1.1" 201 Created
+2025-08-17 22:13:08.886 | INFO:root:Produced event to payment-events: {'payment_id': 20, 'user_id': 20, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:13:08.865Z', 'method_type': 'credit_card'}
+2025-08-17 22:13:08.887 | INFO:root:Consumed from payment-events: {'payment_id': 20, 'user_id': 20, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:13:08.865Z', 'method_type': 'credit_card'}
+2025-08-17 22:13:08.887 | INFO:     172.21.0.1:57628 - "POST /api/events/payment HTTP/1.1" 201 Created
+2025-08-17 22:22:40.447 | INFO:     172.21.0.1:45908 - "GET /api/events/health HTTP/1.1" 200 OK
+2025-08-17 22:22:40.542 | INFO:root:Produced event to movie-events: {'movie_id': 40, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 21, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:22:40.542 | INFO:     172.21.0.1:45908 - "POST /api/events/movie HTTP/1.1" 201 Created
+2025-08-17 22:22:40.544 | INFO:root:Consumed from movie-events: {'movie_id': 40, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 21, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:22:40.616 | INFO:     172.21.0.1:45908 - "POST /api/events/user HTTP/1.1" 201 Created
+2025-08-17 22:22:40.616 | INFO:root:Produced event to user-events: {'user_id': 21, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:22:40.597Z'}
+2025-08-17 22:22:40.617 | INFO:root:Consumed from user-events: {'user_id': 21, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:22:40.597Z'}
+2025-08-17 22:22:40.693 | INFO:root:Produced event to payment-events: {'payment_id': 21, 'user_id': 21, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:22:40.674Z', 'method_type': 'credit_card'}
+2025-08-17 22:22:40.694 | INFO:root:Consumed from payment-events: {'payment_id': 21, 'user_id': 21, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:22:40.674Z', 'method_type': 'credit_card'}
+2025-08-17 22:22:40.693 | INFO:     172.21.0.1:45908 - "POST /api/events/payment HTTP/1.1" 201 Created
+2025-08-17 22:23:59.176 | INFO:     172.21.0.1:53836 - "GET /api/events/health HTTP/1.1" 200 OK
+2025-08-17 22:23:59.393 | INFO:root:Produced event to movie-events: {'movie_id': 42, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 22, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:23:59.393 | INFO:     172.21.0.1:53836 - "POST /api/events/movie HTTP/1.1" 201 Created
+2025-08-17 22:23:59.394 | INFO:root:Consumed from movie-events: {'movie_id': 42, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 22, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:23:59.612 | INFO:     172.21.0.1:53836 - "POST /api/events/user HTTP/1.1" 201 Created
+2025-08-17 22:23:59.612 | INFO:root:Produced event to user-events: {'user_id': 22, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:23:59.591Z'}
+2025-08-17 22:23:59.612 | INFO:root:Consumed from user-events: {'user_id': 22, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:23:59.591Z'}
+2025-08-17 22:23:59.829 | INFO:     172.21.0.1:53836 - "POST /api/events/payment HTTP/1.1" 201 Created
+2025-08-17 22:23:59.829 | INFO:root:Produced event to payment-events: {'payment_id': 22, 'user_id': 22, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:23:59.809Z', 'method_type': 'credit_card'}
+2025-08-17 22:23:59.830 | INFO:root:Consumed from payment-events: {'payment_id': 22, 'user_id': 22, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:23:59.809Z', 'method_type': 'credit_card'}
+2025-08-17 22:26:39.615 | INFO:     172.21.0.1:36218 - "GET /api/events/health HTTP/1.1" 200 OK
+2025-08-17 22:26:39.821 | INFO:     172.21.0.1:36218 - "POST /api/events/movie HTTP/1.1" 201 Created
+2025-08-17 22:26:39.821 | INFO:root:Produced event to movie-events: {'movie_id': 44, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 23, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:26:39.821 | INFO:root:Consumed from movie-events: {'movie_id': 44, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 23, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:26:40.035 | INFO:root:Produced event to user-events: {'user_id': 23, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:26:40.016Z'}
+2025-08-17 22:26:40.036 | INFO:     172.21.0.1:36218 - "POST /api/events/user HTTP/1.1" 201 Created
+2025-08-17 22:26:40.036 | INFO:root:Consumed from user-events: {'user_id': 23, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:26:40.016Z'}
+2025-08-17 22:26:40.252 | INFO:     172.21.0.1:36218 - "POST /api/events/payment HTTP/1.1" 201 Created
+2025-08-17 22:26:40.252 | INFO:root:Produced event to payment-events: {'payment_id': 23, 'user_id': 23, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:26:40.233Z', 'method_type': 'credit_card'}
+2025-08-17 22:26:40.253 | INFO:root:Consumed from payment-events: {'payment_id': 23, 'user_id': 23, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:26:40.233Z', 'method_type': 'credit_card'}
+2025-08-17 22:30:41.842 | INFO:     172.21.0.1:58502 - "GET /api/events/health HTTP/1.1" 200 OK
+2025-08-17 22:30:41.918 | INFO:     172.21.0.1:58502 - "POST /api/events/movie HTTP/1.1" 201 Created
+2025-08-17 22:30:41.918 | INFO:root:Produced event to movie-events: {'movie_id': 46, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 24, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:30:41.919 | INFO:root:Consumed from movie-events: {'movie_id': 46, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 24, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:30:41.997 | INFO:root:Produced event to user-events: {'user_id': 24, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:30:41.974Z'}
+2025-08-17 22:30:41.998 | INFO:root:Consumed from user-events: {'user_id': 24, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:30:41.974Z'}
+2025-08-17 22:30:41.997 | INFO:     172.21.0.1:58502 - "POST /api/events/user HTTP/1.1" 201 Created
+2025-08-17 22:30:42.088 | INFO:     172.21.0.1:58502 - "POST /api/events/payment HTTP/1.1" 201 Created
+2025-08-17 22:30:42.088 | INFO:root:Produced event to payment-events: {'payment_id': 24, 'user_id': 24, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:30:42.069Z', 'method_type': 'credit_card'}
+2025-08-17 22:30:42.088 | INFO:root:Consumed from payment-events: {'payment_id': 24, 'user_id': 24, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:30:42.069Z', 'method_type': 'credit_card'}
+2025-08-17 22:30:52.548 | INFO:     172.21.0.1:50834 - "GET /api/events/health HTTP/1.1" 200 OK
+2025-08-17 22:30:52.625 | INFO:     172.21.0.1:50834 - "POST /api/events/movie HTTP/1.1" 201 Created
+2025-08-17 22:30:52.625 | INFO:root:Produced event to movie-events: {'movie_id': 48, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 25, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:30:52.626 | INFO:root:Consumed from movie-events: {'movie_id': 48, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 25, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:30:52.717 | INFO:root:Produced event to user-events: {'user_id': 25, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:30:52.697Z'}
+2025-08-17 22:30:52.718 | INFO:     172.21.0.1:50834 - "POST /api/events/user HTTP/1.1" 201 Created
+2025-08-17 22:30:52.718 | INFO:root:Consumed from user-events: {'user_id': 25, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:30:52.697Z'}
+2025-08-17 22:30:52.808 | INFO:     172.21.0.1:50834 - "POST /api/events/payment HTTP/1.1" 201 Created
+2025-08-17 22:30:52.807 | INFO:root:Produced event to payment-events: {'payment_id': 25, 'user_id': 25, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:30:52.788Z', 'method_type': 'credit_card'}
+2025-08-17 22:30:52.808 | INFO:root:Consumed from payment-events: {'payment_id': 25, 'user_id': 25, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:30:52.788Z', 'method_type': 'credit_card'}
+2025-08-17 22:31:07.922 | INFO:     172.21.0.1:57244 - "GET /api/events/health HTTP/1.1" 200 OK
+2025-08-17 22:31:08.016 | INFO:     172.21.0.1:57244 - "POST /api/events/movie HTTP/1.1" 201 Created
+2025-08-17 22:31:08.016 | INFO:root:Produced event to movie-events: {'movie_id': 50, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 26, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:31:08.017 | INFO:root:Consumed from movie-events: {'movie_id': 50, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 26, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:31:08.111 | INFO:     172.21.0.1:57244 - "POST /api/events/user HTTP/1.1" 201 Created
+2025-08-17 22:31:08.111 | INFO:root:Produced event to user-events: {'user_id': 26, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:31:08.091Z'}
+2025-08-17 22:31:08.112 | INFO:root:Consumed from user-events: {'user_id': 26, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:31:08.091Z'}
+2025-08-17 22:31:08.190 | INFO:     172.21.0.1:57244 - "POST /api/events/payment HTTP/1.1" 201 Created
+2025-08-17 22:31:08.190 | INFO:root:Produced event to payment-events: {'payment_id': 26, 'user_id': 26, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:31:08.170Z', 'method_type': 'credit_card'}
+2025-08-17 22:31:08.191 | INFO:root:Consumed from payment-events: {'payment_id': 26, 'user_id': 26, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:31:08.170Z', 'method_type': 'credit_card'}
+2025-08-17 22:31:18.563 | INFO:     172.21.0.1:40384 - "GET /api/events/health HTTP/1.1" 200 OK
+2025-08-17 22:31:18.654 | INFO:root:Produced event to movie-events: {'movie_id': 52, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 27, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:31:18.655 | INFO:     172.21.0.1:40384 - "POST /api/events/movie HTTP/1.1" 201 Created
+2025-08-17 22:31:18.655 | INFO:root:Consumed from movie-events: {'movie_id': 52, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 27, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:31:18.746 | INFO:     172.21.0.1:40384 - "POST /api/events/user HTTP/1.1" 201 Created
+2025-08-17 22:31:18.746 | INFO:root:Produced event to user-events: {'user_id': 27, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:31:18.727Z'}
+2025-08-17 22:31:18.747 | INFO:root:Consumed from user-events: {'user_id': 27, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:31:18.727Z'}
+2025-08-17 22:31:18.841 | INFO:root:Produced event to payment-events: {'payment_id': 27, 'user_id': 27, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:31:18.820Z', 'method_type': 'credit_card'}
+2025-08-17 22:31:18.842 | INFO:root:Consumed from payment-events: {'payment_id': 27, 'user_id': 27, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:31:18.820Z', 'method_type': 'credit_card'}
+2025-08-17 22:31:18.841 | INFO:     172.21.0.1:40384 - "POST /api/events/payment HTTP/1.1" 201 Created
+2025-08-17 22:31:26.673 | INFO:     172.21.0.1:36540 - "GET /api/events/health HTTP/1.1" 200 OK
+2025-08-17 22:31:26.764 | INFO:root:Produced event to movie-events: {'movie_id': 54, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 28, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:31:26.764 | INFO:     172.21.0.1:36540 - "POST /api/events/movie HTTP/1.1" 201 Created
+2025-08-17 22:31:26.765 | INFO:root:Consumed from movie-events: {'movie_id': 54, 'title': 'Test Movie Event', 'action': 'viewed', 'user_id': 28, 'rating': None, 'genres': None, 'description': None}
+2025-08-17 22:31:26.857 | INFO:root:Produced event to user-events: {'user_id': 28, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:31:26.838Z'}
+2025-08-17 22:31:26.858 | INFO:root:Consumed from user-events: {'user_id': 28, 'username': 'testuser', 'email': None, 'action': 'logged_in', 'timestamp': '2025-08-17T17:31:26.838Z'}
+2025-08-17 22:31:26.857 | INFO:     172.21.0.1:36540 - "POST /api/events/user HTTP/1.1" 201 Created
+2025-08-17 22:31:26.933 | INFO:root:Produced event to payment-events: {'payment_id': 28, 'user_id': 28, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:31:26.914Z', 'method_type': 'credit_card'}
+2025-08-17 22:31:26.933 | INFO:     172.21.0.1:36540 - "POST /api/events/payment HTTP/1.1" 201 Created
+2025-08-17 22:31:26.934 | INFO:root:Consumed from payment-events: {'payment_id': 28, 'user_id': 28, 'amount': 9.99, 'status': 'completed', 'timestamp': '2025-08-17T17:31:26.914Z', 'method_type': 'credit_card'}

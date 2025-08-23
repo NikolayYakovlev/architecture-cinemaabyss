@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="CinemaAbyss API Tests" tests="22" time="0.152">
+  <testsuite name="Monolith Service / Health Check" id="4d1eb7bb-0b64-4048-9886-2ccb0067a00b" timestamp="2025-08-17T14:44:51.138Z" tests="1" failures="0" errors="0" time="0.018">
+    <testcase name="Status code is 200" time="0.018" classname="MonolithServiceHealthCheck"/>
+  </testsuite>
+  <testsuite name="Monolith Service / Get All Users" id="d532bb86-b198-4042-a896-a5dd15c04262" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.004">
+    <testcase name="Status code is 200" time="0.004" classname="MonolithServiceGetAllUsers"/>
+    <testcase name="Response is an array" time="0.004" classname="MonolithServiceGetAllUsers"/>
+  </testsuite>
+  <testsuite name="Monolith Service / Create User" id="fc894145-2190-4031-a128-f59e0caa222f" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.007">
+    <testcase name="Status code is 201" time="0.007" classname="MonolithServiceCreateUser"/>
+    <testcase name="Response has id" time="0.007" classname="MonolithServiceCreateUser"/>
+  </testsuite>
+  <testsuite name="Monolith Service / Get User by ID" id="6f35d76f-3b7e-4f93-8ffd-e8ca6ee91195" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.004">
+    <testcase name="Status code is 200" time="0.004" classname="MonolithServiceGetUserById"/>
+    <testcase name="User ID matches" time="0.004" classname="MonolithServiceGetUserById"/>
+  </testsuite>
+  <testsuite name="Monolith Service / Get All Movies" id="40eaf3e7-6010-4bbd-b321-056aa85abb34" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.019">
+    <testcase name="Status code is 200" time="0.019" classname="MonolithServiceGetAllMovies"/>
+    <testcase name="Response is an array" time="0.019" classname="MonolithServiceGetAllMovies"/>
+  </testsuite>
+  <testsuite name="Monolith Service / Create Movie" id="29342206-8b6a-4c83-ac59-0ceb636ea5af" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.008">
+    <testcase name="Status code is 201" time="0.008" classname="MonolithServiceCreateMovie"/>
+    <testcase name="Response has id" time="0.008" classname="MonolithServiceCreateMovie"/>
+  </testsuite>
+  <testsuite name="Monolith Service / Get Movie by ID" id="3faa4241-ed6f-405d-b65f-fe566ba325b7" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.003">
+    <testcase name="Status code is 200" time="0.003" classname="MonolithServiceGetMovieById"/>
+    <testcase name="Movie ID matches" time="0.003" classname="MonolithServiceGetMovieById"/>
+  </testsuite>
+  <testsuite name="Monolith Service / Create Payment" id="6e61ee04-2b17-4ffe-97b7-18647fb12501" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.005">
+    <testcase name="Status code is 201" time="0.005" classname="MonolithServiceCreatePayment"/>
+    <testcase name="Response has id" time="0.005" classname="MonolithServiceCreatePayment"/>
+  </testsuite>
+  <testsuite name="Monolith Service / Get Payment by ID" id="25ae953f-b493-453d-8633-36b49ed2c142" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.003">
+    <testcase name="Status code is 200" time="0.003" classname="MonolithServiceGetPaymentById"/>
+    <testcase name="Payment ID matches" time="0.003" classname="MonolithServiceGetPaymentById"/>
+  </testsuite>
+  <testsuite name="Monolith Service / Create Subscription" id="856b8c30-0044-426b-b24c-79ded3034c8d" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.004">
+    <testcase name="Status code is 201" time="0.004" classname="MonolithServiceCreateSubscription"/>
+    <testcase name="Response has id" time="0.004" classname="MonolithServiceCreateSubscription"/>
+  </testsuite>
+  <testsuite name="Monolith Service / Get Subscription by ID" id="9b03de7d-3c5b-47ee-bbd5-3d34ce9edd25" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="Status code is 200" time="0.002" classname="MonolithServiceGetSubscriptionById"/>
+    <testcase name="Subscription ID matches" time="0.002" classname="MonolithServiceGetSubscriptionById"/>
+  </testsuite>
+  <testsuite name="Movies Microservice / Health Check" id="ec1b650a-d906-4333-9280-daab0346e5b6" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.004">
+    <testcase name="Status code is 200" time="0.004" classname="MoviesMicroserviceHealthCheck"/>
+    <testcase name="Status is true" time="0.004" classname="MoviesMicroserviceHealthCheck"/>
+  </testsuite>
+  <testsuite name="Movies Microservice / Get All Movies" id="6b30dd80-e86d-43a7-91c1-37cd8e9cf2ee" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.011">
+    <testcase name="Status code is 200" time="0.011" classname="MoviesMicroserviceGetAllMovies"/>
+    <testcase name="Response is an array" time="0.011" classname="MoviesMicroserviceGetAllMovies"/>
+  </testsuite>
+  <testsuite name="Movies Microservice / Create Movie" id="fead85a5-4a6c-4e73-92f4-63998c778915" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.005">
+    <testcase name="Status code is 201" time="0.005" classname="MoviesMicroserviceCreateMovie"/>
+    <testcase name="Response has id" time="0.005" classname="MoviesMicroserviceCreateMovie"/>
+  </testsuite>
+  <testsuite name="Movies Microservice / Get Movie by ID" id="99b475b5-2048-4dc5-a537-05f12c05b2cf" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.003">
+    <testcase name="Status code is 200" time="0.003" classname="MoviesMicroserviceGetMovieById"/>
+    <testcase name="Movie ID matches" time="0.003" classname="MoviesMicroserviceGetMovieById"/>
+  </testsuite>
+  <testsuite name="Events Microservice / Health Check" id="572b8c66-ac2e-4a4c-a51a-3b0c994fa974" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="2" errors="1" time="0.000">
+    <system-err><![CDATA[Iteration: 0
+RequestError: Error: connect ECONNREFUSED 127.0.0.1:8082
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+---
+]]></system-err>
+    <testcase name="Status code is 200" time="0.000" classname="EventsMicroserviceHealthCheck">
+      <failure type="AssertionFailure" message="expected PostmanResponse{ …(5) } to have property 'code'">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 63632986-8f33-4b40-900c-b3c6a937a052.]]>
+        <![CDATA[Collection name: CinemaAbyss API Tests.]]>
+        <![CDATA[Request name: Events Microservice / Health Check.]]>
+        <![CDATA[Test description: Status code is 200.]]>
+        <![CDATA[Error message: expected PostmanResponse{ …(5) } to have property 'code'.]]>
+        <![CDATA[Stacktrace: AssertionError: expected PostmanResponse{ …(5) } to have property 'code'
+   at Object.eval sandbox-script.js:1:16).]]>
+      </failure>
+    </testcase>
+    <testcase name="Status is true" time="0.000" classname="EventsMicroserviceHealthCheck">
+      <failure type="AssertionFailure" message="&quot;undefined&quot; is not valid JSON">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 63632986-8f33-4b40-900c-b3c6a937a052.]]>
+        <![CDATA[Collection name: CinemaAbyss API Tests.]]>
+        <![CDATA[Request name: Events Microservice / Health Check.]]>
+        <![CDATA[Test description: Status is true.]]>
+        <![CDATA[Error message: "undefined" is not valid JSON.]]>
+        <![CDATA[Stacktrace: JSONError: "undefined" is not valid JSON
+   at Object.eval sandbox-script.js:2:16).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Events Microservice / Create Movie Event" id="ee20a607-6984-4111-b3dc-8570c136f29e" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="2" errors="1" time="0.000">
+    <system-err><![CDATA[Iteration: 0
+RequestError: Error: connect ECONNREFUSED 127.0.0.1:8082
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+---
+]]></system-err>
+    <testcase name="Status code is 201" time="0.000" classname="EventsMicroserviceCreateMovieEvent">
+      <failure type="AssertionFailure" message="expected PostmanResponse{ …(5) } to have property 'code'">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 63632986-8f33-4b40-900c-b3c6a937a052.]]>
+        <![CDATA[Collection name: CinemaAbyss API Tests.]]>
+        <![CDATA[Request name: Events Microservice / Create Movie Event.]]>
+        <![CDATA[Test description: Status code is 201.]]>
+        <![CDATA[Error message: expected PostmanResponse{ …(5) } to have property 'code'.]]>
+        <![CDATA[Stacktrace: AssertionError: expected PostmanResponse{ …(5) } to have property 'code'
+   at Object.eval sandbox-script.js:1:17).]]>
+      </failure>
+    </testcase>
+    <testcase name="Response has status success" time="0.000" classname="EventsMicroserviceCreateMovieEvent">
+      <failure type="AssertionFailure" message="&quot;undefined&quot; is not valid JSON">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 63632986-8f33-4b40-900c-b3c6a937a052.]]>
+        <![CDATA[Collection name: CinemaAbyss API Tests.]]>
+        <![CDATA[Request name: Events Microservice / Create Movie Event.]]>
+        <![CDATA[Test description: Response has status success.]]>
+        <![CDATA[Error message: "undefined" is not valid JSON.]]>
+        <![CDATA[Stacktrace: JSONError: "undefined" is not valid JSON
+   at Object.eval sandbox-script.js:2:17).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Events Microservice / Create User Event" id="1934ab85-1a3d-45f1-8265-eeb70e99d971" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="2" errors="1" time="0.000">
+    <system-err><![CDATA[Iteration: 0
+RequestError: Error: connect ECONNREFUSED 127.0.0.1:8082
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+---
+]]></system-err>
+    <testcase name="Status code is 201" time="0.000" classname="EventsMicroserviceCreateUserEvent">
+      <failure type="AssertionFailure" message="expected PostmanResponse{ …(5) } to have property 'code'">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 63632986-8f33-4b40-900c-b3c6a937a052.]]>
+        <![CDATA[Collection name: CinemaAbyss API Tests.]]>
+        <![CDATA[Request name: Events Microservice / Create User Event.]]>
+        <![CDATA[Test description: Status code is 201.]]>
+        <![CDATA[Error message: expected PostmanResponse{ …(5) } to have property 'code'.]]>
+        <![CDATA[Stacktrace: AssertionError: expected PostmanResponse{ …(5) } to have property 'code'
+   at Object.eval sandbox-script.js:1:18).]]>
+      </failure>
+    </testcase>
+    <testcase name="Response has status success" time="0.000" classname="EventsMicroserviceCreateUserEvent">
+      <failure type="AssertionFailure" message="&quot;undefined&quot; is not valid JSON">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 63632986-8f33-4b40-900c-b3c6a937a052.]]>
+        <![CDATA[Collection name: CinemaAbyss API Tests.]]>
+        <![CDATA[Request name: Events Microservice / Create User Event.]]>
+        <![CDATA[Test description: Response has status success.]]>
+        <![CDATA[Error message: "undefined" is not valid JSON.]]>
+        <![CDATA[Stacktrace: JSONError: "undefined" is not valid JSON
+   at Object.eval sandbox-script.js:2:18).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Events Microservice / Create Payment Event" id="9af590d6-f353-4ef5-b700-a3e6f54256e7" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="2" errors="1" time="0.000">
+    <system-err><![CDATA[Iteration: 0
+RequestError: Error: connect ECONNREFUSED 127.0.0.1:8082
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+---
+]]></system-err>
+    <testcase name="Status code is 201" time="0.000" classname="EventsMicroserviceCreatePaymentEvent">
+      <failure type="AssertionFailure" message="expected PostmanResponse{ …(5) } to have property 'code'">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 63632986-8f33-4b40-900c-b3c6a937a052.]]>
+        <![CDATA[Collection name: CinemaAbyss API Tests.]]>
+        <![CDATA[Request name: Events Microservice / Create Payment Event.]]>
+        <![CDATA[Test description: Status code is 201.]]>
+        <![CDATA[Error message: expected PostmanResponse{ …(5) } to have property 'code'.]]>
+        <![CDATA[Stacktrace: AssertionError: expected PostmanResponse{ …(5) } to have property 'code'
+   at Object.eval sandbox-script.js:1:19).]]>
+      </failure>
+    </testcase>
+    <testcase name="Response has status success" time="0.000" classname="EventsMicroserviceCreatePaymentEvent">
+      <failure type="AssertionFailure" message="&quot;undefined&quot; is not valid JSON">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 63632986-8f33-4b40-900c-b3c6a937a052.]]>
+        <![CDATA[Collection name: CinemaAbyss API Tests.]]>
+        <![CDATA[Request name: Events Microservice / Create Payment Event.]]>
+        <![CDATA[Test description: Response has status success.]]>
+        <![CDATA[Error message: "undefined" is not valid JSON.]]>
+        <![CDATA[Stacktrace: JSONError: "undefined" is not valid JSON
+   at Object.eval sandbox-script.js:2:19).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Proxy Service / Health Check" id="a2ae42fd-4dae-432c-b9ae-c741f62dece6" timestamp="2025-08-17T14:44:51.138Z" tests="1" failures="0" errors="0" time="0.003">
+    <testcase name="Status code is 200" time="0.003" classname="ProxyServiceHealthCheck"/>
+  </testsuite>
+  <testsuite name="Proxy Service / Get All Movies via Proxy" id="114cceb7-c44e-4c0c-84e8-b469a9237959" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.029">
+    <testcase name="Status code is 200" time="0.029" classname="ProxyServiceGetAllMoviesViaProxy"/>
+    <testcase name="Response is an array" time="0.029" classname="ProxyServiceGetAllMoviesViaProxy"/>
+  </testsuite>
+  <testsuite name="Proxy Service / Get All Users via Proxy" id="f074b41c-af6c-4316-a52a-967383ecb190" timestamp="2025-08-17T14:44:51.138Z" tests="2" failures="0" errors="0" time="0.020">
+    <testcase name="Status code is 200" time="0.020" classname="ProxyServiceGetAllUsersViaProxy"/>
+    <testcase name="Response is an array" time="0.020" classname="ProxyServiceGetAllUsersViaProxy"/>
+  </testsuite>
+</testsuites>
