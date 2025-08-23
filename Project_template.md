@@ -423,6 +423,14 @@ template:
 kubectl delete all --all -n cinemaabyss
 kubectl delete  namespace cinemaabyss
 ```
+
+> **Комментарий**
+> 
+> Перед запуском нужно установить Helm. Установка на Windows:
+> ```bash
+> winget install Helm.Helm
+> ```
+
 Запустите 
 ```bash
 helm install cinemaabyss .\src\kubernetes\helm --namespace cinemaabyss --create-namespace
@@ -442,6 +450,8 @@ minikube tunnel
 Потом вызовите 
 https://cinemaabyss.example.com/api/movies
 и приложите скриншот развертывания helm и вывода https://cinemaabyss.example.com/api/movies
+
+> + <img src="tests/postman/reports/report-local-2025-08-23T21-06-00.512Z.png" height="250px" />
 
 ## Удаляем все
 
